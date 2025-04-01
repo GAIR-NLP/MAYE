@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "maye"
+version = "0.1.0"
+description = "MAYE"
+authors = ["Yan Ma <yanma23@m.fudan.edu.cn>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/GAIR-NLP/MAYE"
+repository = "https://github.com/GAIR-NLP/MAYE"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

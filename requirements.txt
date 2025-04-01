@@ -1,0 +1,15 @@
+vllm==0.7.3
+hydra-core==1.4.0.dev1
+hydra-torchrun-launcher @ git+https://github.com/acherstyx/hydra-torchrun-launcher.git
+transformers
+poetry
+sympy
+TexSoup
+math-verify
+psutil
+accelerate
+colorlog
+tqdm
+pandas
+qwen_vl_utils
+wandb

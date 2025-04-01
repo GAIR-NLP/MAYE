@@ -1,0 +1,9 @@
+/data/
+/wandb/
+/outputs/
+.ipynb_checkpoints/
+multirun/
+.pre-commit-config.yaml
+poetry.lock
+*.png
+.env

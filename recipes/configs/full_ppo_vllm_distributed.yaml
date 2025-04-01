@@ -1,0 +1,136 @@
+config: 
+  _target_: transformers.AutoConfig.from_pretrained
+  pretrained_model_name_or_path: /tmp/ckpt_path
+  local_files_only: True
+  device_map: "meta"
+  torch_dtype: auto
+  attn_implementation: flash_attention_2 # sdpa
+
+model:
+  _target_: transformers.AutoModelForCausalLM
+
+checkpoint:
+  _target_: ${model._target_}.from_pretrained
+  pretrained_model_name_or_path: ${config.pretrained_model_name_or_path}
+  device_map: "cpu"
+  torch_dtype: auto
+  local_files_only: True
+  trust_remote_code: False
+
+processor:
+  _target_: transformers.AutoProcessor.from_pretrained
+  pretrained_model_name_or_path: /tmp/ckpt_path
+
+dataset:
+  _target_: maye.datasets.MathGenerationDataset
+  dataset_path: /tmp/dataset_path
+  use_chat_template: True
+
+validation_dataset:
+  _target_: maye.datasets.MathGenerationDataset
+  dataset_path: /tmp/dataset_path
+  use_chat_template: ${dataset.use_chat_template}
+
+test_dataset:
+  _target_: maye.datasets.MathGenerationDataset
+  dataset_path: /tmp/dataset_path
+  use_chat_template: ${dataset.use_chat_template}
+
+collate_fn:
+  _partial_: true
+  _target_: maye.utils.collate.collate_rlhf_vllm
+  use_chat_template: ${dataset.use_chat_template}
+
+validation_collate_fn:
+  _partial_: true
+  _target_: maye.utils.collate.collate_generation_vllm
+  use_chat_template: ${validation_dataset.use_chat_template}
+
+test_collate_fn:
+  _partial_: true
+  _target_: maye.utils.collate.collate_generation_vllm
+  use_chat_template: ${validation_dataset.use_chat_template}
+
+lr_scheduler:
+  _target_: maye.training.lr_schedulers.get_cosine_schedule_with_warmup
+
+output_dir: /tmp/outputs
+device: cuda
+seed: 1234
+
+enable_lr_scheduler: False
+
+# Training arguments
+batch_size: 128
+num_epochs: 100
+ppo_epochs: 1
+ppo_batch_size: 128
+gradient_accumulation_steps: 1
+
+
+
+compile: True  # torch.compile the model + loss, True increases speed + decreases memory
+optimizer:
+  _target_: torch.optim.AdamW
+  weight_decay: 0.01
+  lr: 3e-6
+  fused: True
+  betas: [0.9, 0.95]
+  eps: 1e-5
+
+
+clip_grad_norm: null
+enable_activation_checkpointing: True # True reduces memory
+enable_activation_offloading: False  # True reduces memory
+custom_sharded_layers: ["model.embed_tokens", "lm_head"]
+reshard_after_forward: False
+fsdp_cpu_offload: False
+
+train_vit: False
+train_connector: True
+train_llm: True
+
+dtype: bfloat16
+
+
+forward_batch_size: 8
+generation_kwargs:
+  _target_: vllm.SamplingParams
+  max_tokens: 2048
+  top_p: 1.0
+  temperature: 1.0
+
+
+vllm:
+  device: "auto"
+  model: ${config.pretrained_model_name_or_path}
+  dtype: ${dtype}
+  gpu_memory_utilization: 0.8
+  enable_prefix_caching: False
+
+min_response_length: 18
+penalise_no_eos: True
+reward_penalty: -0.1
+
+whiten_rewards: False
+
+gamma: 0.999
+
+loss:
+  _target_: maye.rlhf.loss.PPOLoss
+  epsilon_low: 0.2
+  epsilon_high: 0.2
+  kl_loss_coeff: 0.01
+
+kl_reward_coeff: 0.01
+
+metric_logger:
+  _target_: maye.training.WandBLogger
+  log_dir: ${output_dir}
+  project: tmp
+  name: tmp
+  tags: [tmp]
+
+log_every_n_steps: 1
+save_every_n_epochs: 0
+save_eval_files: False
