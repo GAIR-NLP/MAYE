@@ -1,4 +1,4 @@
-# <img src="./assets/logo.png" alt="Logo" style="height: 1.0em; vertical-align: 0.em;"/>**MAYE**: A Transparent, From-Scratch RL Framework for Vision-Language Models
+# <img src="./assets/logo.png" alt="Logo" width="28" style="vertical-align: middle;"/>**MAYE**: A Transparent, From-Scratch RL Framework for Vision-Language Models
 
 <div align="center">
 <p align="center">
