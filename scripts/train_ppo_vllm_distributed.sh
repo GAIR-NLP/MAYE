@@ -40,7 +40,7 @@ else
 fi
 
 # File paths
-CKPT_PATH=/tmp/ckpts/$MODEL_NAME
+MODEL_PATH=/tmp/ckpts/$MODEL_NAME
 PROCESSOR_PATH=/tmp/ckpts/$PROCESSOR_NAME
 OUTPUT_DIR=/tmp/ckpts/$MODEL_NAME-$DATADIR_NAME
 TRAIN_DATASET_PATH=/tmp/MAYE/datasets/$DATADIR/${TRAIN_DATASET_NAME}.jsonl
@@ -91,7 +91,7 @@ CUDA_VISIBLE_DEVICES=$DEVICES torchrun \
     --master_port=12345 \
     recipes/full_ppo_vllm_distributed.py \
     --config-name="full_ppo_vllm_distributed" \
-    config.pretrained_model_name_or_path="${CKPT_PATH}" \
+    config.pretrained_model_name_or_path="${MODEL_PATH}" \
     model._target_=transformers."${MODEL_CLASS_NAME}" \
     processor._target_=transformers.AutoProcessor.from_pretrained \
     processor.pretrained_model_name_or_path="${PROCESSOR_PATH}" \
