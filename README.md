@@ -63,7 +63,7 @@ Each sample follows the format:
 ```
 
 📌 Field descriptions:
-
+```
 question: mathematical question.
 
 answer: ground-truth numeric answer.
@@ -71,6 +71,7 @@ answer: ground-truth numeric answer.
 solution: final boxed output with or without step-by-step reasoning.
 
 image: felative path to the image file (relative to the .jsonl location).
+```
 
 ## 🚀 Quick Start
 
