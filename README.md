@@ -28,7 +28,7 @@ Instead, it aims to offer a transparent, lightweight, and educational framework 
 In spirit, it is similar to [OpenAI SpinningUp](https://spinningup.openai.com/en/latest/): not focused on performance or feature completeness, but on being a clear and reproducible entry point for understanding and building VLM-RL systems.
 
 
-The code is validated on 8 GPUs using a hybrid setup:
+The code is validated on 8 GPUs using the following setup:
 
 - Ranks 0–6: handle distributed training via [FSDP2](https://github.com/pytorch/torchtitan/blob/main/docs/fsdp.md).
 - Rank 7: is dedicated to high-throughput inference using [vLLM](https://github.com/vllm-project/vllm).
