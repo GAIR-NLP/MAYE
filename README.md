@@ -1,4 +1,4 @@
-# <img src="./assets/logo.png" alt="Logo" width="28" style="vertical-align: middle;"/>**MAYE**: A Transparent, From-Scratch RL Framework for Vision-Language Models
+# <img src="./assets/logo.png" alt="Logo" width="28" style="vertical-align: middle;"/>Rethinking RL Scaling for Vision Language Models: A Transparent, From-Scratch Framework and Comprehensive Evaluation Scheme
 
 <div align="center">
 <p align="center">
@@ -9,7 +9,7 @@
 
 ## 📚 Overview
 
-This project presents **MAYE**, a transparent and reproducible framework for applying reinforcement learning (RL) to vision-language models (VLMs), built entirely from scratch without relying on existing RL toolkits.
+This project presents **MAYE**, a transparent and reproducible framework and a comprehensive evaluation scheme for applying reinforcement learning (RL) to vision-language models (VLMs). The codebase is built entirely from scratch without relying on existing RL toolkits.
 
 Key contributions include:
 
