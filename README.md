@@ -70,7 +70,7 @@ answer: ground-truth numeric answer.
 
 solution: final boxed output with or without step-by-step reasoning.
 
-image: felative path to the image file (relative to the .jsonl location).
+image: relative path to the image file (relative to the .jsonl location).
 ```
 
 ## 🚀 Quick Start
