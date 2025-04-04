@@ -2,7 +2,7 @@
 
 <div align="center">
 <p align="center">
-  📖 <a href="./assets/paper.pdf">Paper</a> |
+  📖 <a href="https://arxiv.org/abs/2504.02587">Paper</a> |
   🤗 <a href="https://huggingface.co/datasets/ManTle/MAYE">Datasets</a>
 </p>
 </div>
