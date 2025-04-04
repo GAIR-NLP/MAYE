@@ -201,7 +201,7 @@ bash scripts/train_ppo_vllm_distributed.sh
 If you find our work helpful, please consider citing:
 
 ```
-@article{MAYE,
+@article{ma2025maye,
   title={Rethinking RL Scaling for Vision Language Models: A Transparent, From-Scratch Framework and Comprehensive Evaluation Scheme},
   author={Ma, Yan and Chern, Steffi and Shen, Xuyang and Zhong, Yiran and Liu, Pengfei},
   journal={arXiv preprint arXiv:2504.02587},
