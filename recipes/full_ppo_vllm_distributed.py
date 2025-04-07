@@ -1374,7 +1374,7 @@ class PPOFullFinetuneRecipeDistributed:
             llm_model.load_weights(cpu_state_dict.items())
 
 
-@hydra.main(version_base=None, config_path="configs", config_name="full_ppo")
+@hydra.main(version_base=None, config_path="configs", config_name="full_ppo_vllm_distributed")
 def main(cfg: DictConfig):
     recipe = PPOFullFinetuneRecipeDistributed(cfg=cfg)
     recipe.setup(cfg=cfg)
