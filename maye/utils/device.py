@@ -114,12 +114,14 @@ def get_device(device: str | None) -> torch.device:
 
 
 def get_visible_device(index: int) -> int:
-    cuda_visible_devices = os.environ.get("CUDA_VISIBLE_DEVICES", "")
-    device_list = cuda_visible_devices.split(",") if cuda_visible_devices else []
+    devices = list(range(torch.cuda.device_count()))
 
-    if index < len(device_list):
-        return int(device_list[index])
-    else:
+    if not devices:
+        raise RuntimeError("No CUDA devices available.")
+
+    try:
+        return devices[index]
+    except IndexError:
         raise ValueError(
-            f"Error: Index {index} out of range. Available devices: {device_list}"
+            f"Error: Index {index} out of range. Available logical devices: {devices}"
         )
